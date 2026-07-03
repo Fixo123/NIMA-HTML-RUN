@@ -2,7 +2,7 @@
 <html lang="si">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>⚡ NIMA HTML RUN - Premium Live Editor</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -30,22 +30,24 @@
             display: flex;
             flex-direction: column;
             height: 100vh;
+            height: 100dvh; /* Mobile browsers වලට හොඳම විසඳුම */
             overflow: hidden;
         }
 
-        /* Premium Floating Header */
+        /* Floating Header */
         header {
             background: var(--glass-bg);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             margin: 15px 20px 0 20px;
-            padding: 15px 25px;
+            padding: 12px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             border: 1px solid var(--glass-border);
             border-radius: 16px;
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            flex-shrink: 0;
         }
 
         .logo {
@@ -56,8 +58,8 @@
 
         .logo-icon-box {
             background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-            width: 40px;
-            height: 40px;
+            width: 36px;
+            height: 36px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -67,11 +69,11 @@
 
         .logo-icon-box i {
             color: #fff;
-            font-size: 18px;
+            font-size: 16px;
         }
 
         header h1 {
-            font-size: 22px;
+            font-size: 18px;
             font-weight: 800;
             letter-spacing: 0.5px;
             background: var(--accent-glow);
@@ -85,9 +87,9 @@
             gap: 8px;
             background: rgba(16, 185, 129, 0.1);
             border: 1px solid rgba(16, 185, 129, 0.2);
-            padding: 6px 14px;
+            padding: 6px 12px;
             border-radius: 30px;
-            font-size: 12px;
+            font-size: 11px;
             color: #34d399;
             font-weight: 600;
         }
@@ -100,13 +102,13 @@
             animation: pulse 1.5s infinite;
         }
 
-        /* Main Studio Workspace */
+        /* Flexible Studio Workspace */
         .workspace {
             display: flex;
             flex: 1;
-            padding: 20px;
-            gap: 20px;
-            height: calc(100vh - 100px);
+            padding: 15px 20px 20px 20px;
+            gap: 15px;
+            overflow: hidden; /* පිටුව උඩට පල්ලෙහාට Scroll වීම වලක්වයි */
         }
 
         .panel {
@@ -120,76 +122,69 @@
             border: 1px solid var(--glass-border);
             overflow: hidden;
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s ease;
-        }
-
-        .panel:focus-within {
-            border-color: rgba(99, 102, 241, 0.4);
-            box-shadow: 0 8px 32px 0 rgba(99, 102, 241, 0.15);
         }
 
         .panel-header {
             background: rgba(15, 23, 42, 0.4);
-            padding: 14px 20px;
+            padding: 10px 15px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             border-bottom: 1px solid var(--glass-border);
+            flex-shrink: 0;
         }
 
         .panel-title {
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 600;
             color: var(--text-muted);
             text-transform: uppercase;
             letter-spacing: 1px;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
         }
 
         .actions {
             display: flex;
-            gap: 8px;
+            gap: 6px;
         }
 
         .btn {
             background: rgba(255, 255, 255, 0.05);
             color: var(--text-main);
             border: 1px solid var(--glass-border);
-            padding: 6px 14px;
-            border-radius: 8px;
+            padding: 5px 10px;
+            border-radius: 6px;
             cursor: pointer;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 600;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 4px;
             transition: all 0.2s ease;
         }
 
         .btn:hover {
             background: rgba(255, 255, 255, 0.1);
-            border-color: rgba(255, 255, 255, 0.2);
         }
 
         .btn-clear:hover {
             background: rgba(239, 68, 68, 0.2);
             border-color: rgba(239, 68, 68, 0.4);
-            color: #fca5a5;
         }
 
-        /* Editor Input Grid */
+        /* Textarea Input */
         textarea {
             width: 100%;
             flex: 1;
             background: rgba(15, 23, 42, 0.6);
             color: #cbd5e1;
             border: none;
-            padding: 20px;
+            padding: 15px;
             font-family: 'JetBrains Mono', monospace;
-            font-size: 14px;
-            line-height: 1.7;
+            font-size: 13px;
+            line-height: 1.6;
             resize: none;
             outline: none;
         }
@@ -208,19 +203,38 @@
             background: #ffffff;
         }
 
-        /* Animations */
         @keyframes pulse {
             0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
             70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
             100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
         }
 
-        /* Responsive */
-        @media (max-width: 900px) {
-            body { overflow-y: auto; height: auto; }
-            header { margin: 10px 10px 0 10px; }
-            .workspace { flex-direction: column; height: auto; padding: 10px; }
-            .panel { min-height: 400px; }
+        /* 📱 Mobile Responsive Update (ප්‍රශ්නය විසඳූ කොටස) */
+        @media (max-width: 768px) {
+            header {
+                margin: 10px 10px 0 10px;
+                padding: 10px 15px;
+            }
+            header h1 {
+                font-size: 15px;
+            }
+            .status-badge {
+                padding: 4px 8px;
+                font-size: 10px;
+            }
+            .workspace {
+                flex-direction: column; /* උඩ සහ පල්ලෙහාට පැනල් සකසයි */
+                padding: 10px;
+                gap: 10px;
+            }
+            .panel {
+                flex: 1; /* පැනල් දෙකටම සමාන ඉඩක් ලබාදේ */
+                height: 50%; /* Screen එකෙන් හරියටම අඩක් ගනී */
+            }
+            textarea {
+                font-size: 12px;
+                padding: 10px;
+            }
         }
     </style>
 </head>
@@ -235,7 +249,7 @@
         </div>
         <div class="status-badge">
             <div class="pulse-dot"></div>
-            LIVE PREVIEW ACTIVE
+            LIVE PREVIEW
         </div>
     </header>
 
@@ -243,7 +257,7 @@
         
         <div class="panel">
             <div class="panel-header">
-                <div class="panel-title"><i class="fa-solid fa-code" style="color: #60a5fa;"></i> Source Editor</div>
+                <div class="panel-title"><i class="fa-solid fa-code" style="color: #60a5fa;"></i> Editor</div>
                 <div class="actions">
                     <button class="btn" onclick="copyCode()"><i class="fa-regular fa-copy"></i> Copy</button>
                     <button class="btn btn-clear" onclick="clearCode()"><i class="fa-regular fa-trash-can"></i> Clear</button>
@@ -254,7 +268,7 @@
 
         <div class="panel">
             <div class="panel-header">
-                <div class="panel-title"><i class="fa-solid fa-laptop-code" style="color: #a78bfa;"></i> Output Window</div>
+                <div class="panel-title"><i class="fa-solid fa-laptop-code" style="color: #a78bfa;"></i> Preview</div>
             </div>
             <div class="preview-body">
                 <iframe id="output"></iframe>
@@ -288,14 +302,13 @@
             alert("කේතය සාර්ථකව Copy කරගත්තා! 👍");
         }
         
-        // Default Dynamic Template
         window.onload = function() {
             editor.value = `<!DOCTYPE html>
 <html>
 <head>
     <style>
         body {
-            font-family: system-ui, -apple-system, sans-serif;
+            font-family: system-ui, sans-serif;
             background: #0f172a;
             color: white;
             display: flex;
@@ -306,13 +319,13 @@
         }
         .card {
             background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
+            padding: 20px;
+            border-radius: 15px;
             text-align: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
         }
-        h1 { margin: 0 0 10px 0; font-size: 32px; }
-        p { color: #bfdbfe; font-size: 16px; margin: 0; }
+        h1 { margin: 0 0 5px 0; font-size: 24px; }
+        p { color: #bfdbfe; font-size: 14px; margin: 0; }
     </style>
 </head>
 <body>
