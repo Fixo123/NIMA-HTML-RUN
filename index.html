@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⚡ NIMA HTML RUN - Premium Live Editor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+            --glass-bg: rgba(30, 41, 59, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --accent-glow: linear-gradient(90deg, #38bdf8, #818cf8, #c084fc);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background: var(--bg-gradient);
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Premium Floating Header */
+        header {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            margin: 15px 20px 0 20px;
+            padding: 15px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon-box {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(139, 92, 246, 0.5);
+        }
+
+        .logo-icon-box i {
+            color: #fff;
+            font-size: 18px;
+        }
+
+        header h1 {
+            font-size: 22px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            background: var(--accent-glow);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .status-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-size: 12px;
+            color: #34d399;
+            font-weight: 600;
+        }
+
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #10b981;
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+        }
+
+        /* Main Studio Workspace */
+        .workspace {
+            display: flex;
+            flex: 1;
+            padding: 20px;
+            gap: 20px;
+            height: calc(100vh - 100px);
+        }
+
+        .panel {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 16px;
+            border: 1px solid var(--glass-border);
+            overflow: hidden;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .panel:focus-within {
+            border-color: rgba(99, 102, 241, 0.4);
+            box-shadow: 0 8px 32px 0 rgba(99, 102, 241, 0.15);
+        }
+
+        .panel-header {
+            background: rgba(15, 23, 42, 0.4);
+            padding: 14px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .panel-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-main);
+            border: 1px solid var(--glass-border);
+            padding: 6px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-clear:hover {
+            background: rgba(239, 68, 68, 0.2);
+            border-color: rgba(239, 68, 68, 0.4);
+            color: #fca5a5;
+        }
+
+        /* Editor Input Grid */
+        textarea {
+            width: 100%;
+            flex: 1;
+            background: rgba(15, 23, 42, 0.6);
+            color: #cbd5e1;
+            border: none;
+            padding: 20px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            line-height: 1.7;
+            resize: none;
+            outline: none;
+        }
+
+        /* Preview Window Container */
+        .preview-body {
+            flex: 1;
+            background: #ffffff;
+            position: relative;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: #ffffff;
+        }
+
+        /* Animations */
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            body { overflow-y: auto; height: auto; }
+            header { margin: 10px 10px 0 10px; }
+            .workspace { flex-direction: column; height: auto; padding: 10px; }
+            .panel { min-height: 400px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <div class="logo-icon-box">
+                <i class="fa-solid fa-terminal"></i>
+            </div>
+            <h1>NIMA HTML RUN</h1>
+        </div>
+        <div class="status-badge">
+            <div class="pulse-dot"></div>
+            LIVE PREVIEW ACTIVE
+        </div>
+    </header>
+
+    <div class="workspace">
+        
+        <div class="panel">
+            <div class="panel-header">
+                <div class="panel-title"><i class="fa-solid fa-code" style="color: #60a5fa;"></i> Source Editor</div>
+                <div class="actions">
+                    <button class="btn" onclick="copyCode()"><i class="fa-regular fa-copy"></i> Copy</button>
+                    <button class="btn btn-clear" onclick="clearCode()"><i class="fa-regular fa-trash-can"></i> Clear</button>
+                </div>
+            </div>
+            <textarea id="editor" spellcheck="false" oninput="updateOutput()"></textarea>
+        </div>
+
+        <div class="panel">
+            <div class="panel-header">
+                <div class="panel-title"><i class="fa-solid fa-laptop-code" style="color: #a78bfa;"></i> Output Window</div>
+            </div>
+            <div class="preview-body">
+                <iframe id="output"></iframe>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const editor = document.getElementById("editor");
+        const output = document.getElementById("output");
+
+        function updateOutput() {
+            const code = editor.value;
+            const documentContent = output.contentDocument || output.contentWindow.document;
+            documentContent.open();
+            documentContent.write(code);
+            documentContent.close();
+        }
+
+        function clearCode() {
+            if(confirm("ඔබට සියලුම කේතයන් මකා දැමීමට අවශ්‍යද?")) {
+                editor.value = "";
+                updateOutput();
+            }
+        }
+
+        function copyCode() {
+            editor.select();
+            document.execCommand("copy");
+            alert("කේතය සාර්ථකව Copy කරගත්තා! 👍");
+        }
+        
+        // Default Dynamic Template
+        window.onload = function() {
+            editor.value = `<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            background: #0f172a;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .card {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
+            text-align: center;
+        }
+        h1 { margin: 0 0 10px 0; font-size: 32px; }
+        p { color: #bfdbfe; font-size: 16px; margin: 0; }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h1>Hello World!</h1>
+        <p>NIMA HTML RUN සජීවීව ක්‍රියාත්මකයි.</p>
+    </div>
+
+</body>
+</html>`;
+            updateOutput();
+        }
+    </script>
+
+</body>
+</html>
